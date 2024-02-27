@@ -1,0 +1,26 @@
+{
+  "name": "chat-app-backend",
+  "version": "1.0.0",
+  "description": "A chat application using MERN Stack with socket.io",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "npm index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "author": "Sambit Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.1.3",
+    "nodemon": "^3.0.3"
+  }
+}
