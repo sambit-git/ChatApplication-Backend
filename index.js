@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 // Import Routers
 import userRouter from "./routes/auth.routes.js";
 import chatRouter from "./routes/chat.routes.js";
+import messageRouter from "./routes/message.routes.js";
 
 // Import custom middlewares
 import { sendErrorResponse } from "./middlewares/general.middlewares.js";
@@ -24,6 +25,7 @@ app.use(express.static("static"));
 // use api routes
 app.use("/api/users/", userRouter);
 app.use("/api/chats/", chatRouter);
+app.use("/api/messages/", messageRouter);
 
 // use custom middlewares
 app.use(sendErrorResponse);
