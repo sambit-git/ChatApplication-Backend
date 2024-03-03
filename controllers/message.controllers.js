@@ -41,8 +41,7 @@ export const fetchMessages = async (req, res, next) => {
   try {
     const messages = await Message.find({ chat: chatId })
       .populate("sender", "fullName photo email")
-      .populate("chat")
-      .sort({ updatedAt: -1 });
+      .populate("chat");
     res.status(200).json(messages);
   } catch (error) {
     return next(error);
