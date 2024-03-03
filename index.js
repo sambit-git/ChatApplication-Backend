@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import cors from "cors";
 import dotenv from "dotenv";
 
 // Import Routers
@@ -19,6 +20,7 @@ mongoose
 
 // Create server & use necessary middlewares
 const app = express();
+app.use(cors({ origin: process.env.FRONTEND_ENDPOINT }));
 app.use(express.json());
 app.use(express.static("static"));
 

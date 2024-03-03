@@ -9,3 +9,4 @@ create a .env file in the project root directory and use the below variables. ch
 - DB_CONN_STR = "mongodb://127.0.0.1:27017/"
 - PORT = 3000
 - JWT_SALT = "mychatapplication"
+- FRONTEND_ENDPOINT = "http://localhost:5173"
