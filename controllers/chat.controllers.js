@@ -58,7 +58,7 @@ export const fetchAllChats = async (req, res, next) => {
 };
 
 export const createGroup = async (req, res, next) => {
-  const { chatName, users } = req.body;
+  const { chatName, users, photo } = req.body;
   if (!chatName || !users)
     return next(
       customErrorResponse(400, "Bad Request! chatName & users are required!")
@@ -70,6 +70,7 @@ export const createGroup = async (req, res, next) => {
       isGroupChat: true,
       users,
       admin: req.user,
+      photo: photo,
     });
     const response = await Chat.findById(groupChat._id)
       .populate("users", "-password")
