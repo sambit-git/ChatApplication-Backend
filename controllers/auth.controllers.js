@@ -88,4 +88,6 @@ export const getUsers = async (req, res, next) => {
   }
 };
 
-export const getUser = (req, res, next) => {};
+export const getSelf = (req, res, next) => {
+  res.json({ success: true, userData: req.user });
+};
