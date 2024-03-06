@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import { Server } from "socket.io";
 
 // Import Routers
 import userRouter from "./routes/auth.routes.js";
@@ -34,6 +35,38 @@ app.use(sendErrorResponse);
 
 // Bind server to PORT & start listening
 const port = process.env.PORT;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Running on http://localhost:${port}`);
+});
+
+// Socket.io Connection & Events handling
+const io = new Server(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: process.env.FRONTEND_ENDPOINT,
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("connected to socket.");
+
+  socket.on("setup", (userId) => {
+    socket.join(userId);
+    console.log(`User(${userId}) connected!`);
+    socket.emit("connected");
+  });
+
+  socket.on("join-chat", (chatId) => {
+    socket.join(chatId);
+    console.log(`User joined chat(${chatId})`);
+  });
+
+  socket.on("new-message", (msg) => {
+    let chat = msg.chat;
+
+    chat.users.forEach((user) => {
+      if (user._id === msg.sender._id) return;
+      socket.in(user._id).emit("message-received", msg);
+    });
+  });
 });
